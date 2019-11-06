@@ -17,21 +17,35 @@ namespace ProMvc01
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+
+        public IConfiguration _configuration { get; }
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IWelcomeServices, WelcomeServices>();
             services.AddSingleton<IDateTimeData, DateTimeData>();
+           
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddHttpClient();
+
+            //注册appsetting的值            
+            services.Configure<AppSetting>(_configuration.GetSection("Zhu:Kai"));
+           
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app,
                               IHostingEnvironment env,
                               IConfiguration iconfiguration,//找appsetting的值
-                              IWelcomeServices welcomeServices,//自己写个服务
+                              //IWelcomeServices welcomeServices,//自己写个服务
                               ILogger<Startup> logger,
                               ILoggerFactory loggerFactory
                               )
@@ -41,9 +55,6 @@ namespace ProMvc01
             //    app.UseDeveloperExceptionPage();
             //}
             //中间件  app.Usexxx(可以实力对象)
-
-
-
 
             loggerFactory.AddNLog();//添加NLog                                    
             env.ConfigureNLog("nlog.config");//引入Nlog配置文件
