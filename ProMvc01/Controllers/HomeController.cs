@@ -31,7 +31,6 @@ namespace ProMvc01
             _WelcomeServices = welcomeServices;
             _myhttpclientfactory = myhttpclientfactory;
             _Setting = Setting;
-
         }
 
         // GET: /<controller>/

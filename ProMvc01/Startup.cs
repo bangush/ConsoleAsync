@@ -37,7 +37,20 @@ namespace ProMvc01
 
             //注册appsetting的值            
             services.Configure<AppSetting>(_configuration.GetSection("Zhu:Kai"));
-           
+
+            var conn = _configuration.GetSection("ConnectionStrings");
+            string efconn = conn["kkk"];
+            string conns = conn["zzz"];
+
+            //OMSECData.Acc_OmsContext.ConnectionString = efconn;
+            //services.AddDbContext<OMSECData.Acc_OmsContext>
+            //(
+            //    options => options.UseSqlServer(efconn)
+            //);
+            //上面和下面的是同样的为Context链接的数据的方式
+            //OMSECData.Acc_OmsContext.ConnectionString = conns;
+
+
 
         }
 
