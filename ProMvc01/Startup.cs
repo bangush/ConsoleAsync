@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using NLog.Web;
+using NetStandard_Helper;
 
 namespace ProMvc01
 {
@@ -21,6 +22,7 @@ namespace ProMvc01
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IWelcomeServices, WelcomeServices>();
+            services.AddSingleton<IDateTimeData, DateTimeData>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
