@@ -20,17 +20,32 @@ namespace ProMvc01
         public IHttpClientFactory _myhttpclientfactory;
         public IOptions<AppSetting> _Setting;
 
+
+        private readonly ITransientService _guidTransientService;
+        private readonly IScopedService _guidScopedService;
+        private readonly ISingletonService _guidSingletonService;
+
         public HomeController( ILogger<HomeController> logger, 
                                IDateTimeData dateTimeData, 
                                IWelcomeServices welcomeServices, 
                                IHttpClientFactory myhttpclientfactory, 
-                               IOptions<AppSetting> Setting)
+                               IOptions<AppSetting> Setting,
+
+                               ITransientService guidTransientService,
+                               IScopedService guidScopedService, 
+                               ISingletonService guidSingletonService
+
+            )
         {
             _logger = logger;
             _dateTimeData = dateTimeData;
             _WelcomeServices = welcomeServices;
             _myhttpclientfactory = myhttpclientfactory;
             _Setting = Setting;
+
+            _guidTransientService = guidTransientService;
+            _guidScopedService = guidScopedService;
+            _guidSingletonService = guidSingletonService;
         }
 
         // GET: /<controller>/
@@ -40,6 +55,14 @@ namespace ProMvc01
             _logger.LogError("我是错误显示"+ _dateTimeData);
             _logger.LogDebug("我是调试信息"+ _WelcomeServices);
             _logger.LogInformation("我是提示信息____"+ GetV());
+
+            ViewBag.TransientItem = _guidTransientService.id();
+            ViewBag.ScopedItem = _guidScopedService.id();
+            
+            ViewBag.SingletonItem = _guidSingletonService.id();
+
+
+
             return View();
         }
 

@@ -30,7 +30,12 @@ namespace ProMvc01
         {
             services.AddSingleton<IWelcomeServices, WelcomeServices>();
             services.AddSingleton<IDateTimeData, DateTimeData>();
-           
+
+            services.AddTransient<ITransientService, TransientService>();
+            services.AddTransient<IScopedService, ScopedService>();
+            services.AddTransient<ISingletonService, SingletonService>();
+
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddHttpClient();
@@ -59,7 +64,7 @@ namespace ProMvc01
                               IHostingEnvironment env,
                               IConfiguration iconfiguration,//找appsetting的值
                               //IWelcomeServices welcomeServices,//自己写个服务
-                              ILogger<Startup> logger,
+                              //ILogger<Startup> logger,
                               ILoggerFactory loggerFactory
                               )
         {
@@ -97,6 +102,8 @@ namespace ProMvc01
             //    //var hello = welcomeServices.GetMessgse();
             //    await context.Response.WriteAsync("15");
             //});
+
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

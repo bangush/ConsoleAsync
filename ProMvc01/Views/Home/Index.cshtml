@@ -1,7 +1,12 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@{
+    ViewData["Title"] = "Home Page";
 }
 
-<h2>Index</h2>
-
+<div class="row">
+    <div>
+        <h2>Guid Service Shows</h2>
+        <h3>TransientGuid: @ViewBag.TransientItem</h3>
+        <h3>ScopedGuid: @ViewBag.ScopedItem</h3>
+        <h3>SingletonGuid: @ViewBag.SingletonItem</h3>
+    </div>
+</div>
