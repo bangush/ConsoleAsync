@@ -5,8 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetCore.CAP" Version="2.6.0" />
+    <PackageReference Include="DotNetCore.CAP.RabbitMQ" Version="2.6.0" />
+    <PackageReference Include="DotNetCore.CAP.SqlServer" Version="2.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.Net.Compilers" Version="2.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>
