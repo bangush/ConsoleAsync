@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseContextByPowerTool"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProMvc05", "ProMvc05\ProMvc05.csproj", "{5A1082F7-B6AB-4E79-B448-D4FF9F935D82}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSMQServer", "MSMQServer\MSMQServer.csproj", "{9DBC19F6-481A-456C-A9EE-FDA3AF1EF7CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSMQClient", "MSMQClient\MSMQClient.csproj", "{B325FFA1-C84A-42D5-8EF4-13831E8917EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +61,14 @@ Global
 		{5A1082F7-B6AB-4E79-B448-D4FF9F935D82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A1082F7-B6AB-4E79-B448-D4FF9F935D82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A1082F7-B6AB-4E79-B448-D4FF9F935D82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DBC19F6-481A-456C-A9EE-FDA3AF1EF7CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DBC19F6-481A-456C-A9EE-FDA3AF1EF7CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DBC19F6-481A-456C-A9EE-FDA3AF1EF7CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DBC19F6-481A-456C-A9EE-FDA3AF1EF7CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B325FFA1-C84A-42D5-8EF4-13831E8917EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B325FFA1-C84A-42D5-8EF4-13831E8917EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B325FFA1-C84A-42D5-8EF4-13831E8917EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B325FFA1-C84A-42D5-8EF4-13831E8917EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
