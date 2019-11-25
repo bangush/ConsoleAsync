@@ -15,13 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProMvc04", "ProMvc04\ProMvc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetStandard_Helper", "NetStandard_Helper\NetStandard_Helper.csproj", "{09E14877-2DA3-40A6-BE8A-718C983A593A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseContextByPowerTool", "DataBaseContextByPowerTool\DataBaseContextByPowerTool.csproj", "{6018FC7C-8016-4AE9-9A21-EE0909281481}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBaseContextByPowerTool", "DataBaseContextByPowerTool\DataBaseContextByPowerTool.csproj", "{6018FC7C-8016-4AE9-9A21-EE0909281481}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProMvc05", "ProMvc05\ProMvc05.csproj", "{5A1082F7-B6AB-4E79-B448-D4FF9F935D82}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSMQServer", "MSMQServer\MSMQServer.csproj", "{9DBC19F6-481A-456C-A9EE-FDA3AF1EF7CC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSMQClient", "MSMQClient\MSMQClient.csproj", "{B325FFA1-C84A-42D5-8EF4-13831E8917EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProMvc05", "ProMvc05\ProMvc05.csproj", "{5A1082F7-B6AB-4E79-B448-D4FF9F935D82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,14 +57,6 @@ Global
 		{5A1082F7-B6AB-4E79-B448-D4FF9F935D82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A1082F7-B6AB-4E79-B448-D4FF9F935D82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A1082F7-B6AB-4E79-B448-D4FF9F935D82}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9DBC19F6-481A-456C-A9EE-FDA3AF1EF7CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9DBC19F6-481A-456C-A9EE-FDA3AF1EF7CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9DBC19F6-481A-456C-A9EE-FDA3AF1EF7CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9DBC19F6-481A-456C-A9EE-FDA3AF1EF7CC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B325FFA1-C84A-42D5-8EF4-13831E8917EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B325FFA1-C84A-42D5-8EF4-13831E8917EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B325FFA1-C84A-42D5-8EF4-13831E8917EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B325FFA1-C84A-42D5-8EF4-13831E8917EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
