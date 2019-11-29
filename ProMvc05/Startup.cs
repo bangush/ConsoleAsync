@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ProMvc05.MQ;
 
 namespace ProMvc05
 {
@@ -22,6 +23,11 @@ namespace ProMvc05
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            LogicAppService.ServiceBusConnectingString = "";
+            LogicAppService.TopicName = "";
+            services.AddTransient<ILogicAppService, LogicAppService>();////////这里用瞬时模式，程序启动就会使LogicAppService类启动
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
