@@ -7,6 +7,8 @@ using Microsoft.Extensions.Logging;
 using NetStandard_Helper;
 using System.Net.Http;
 using Microsoft.Extensions.Options;
+using RabbitMQ.Client;
+using System.Text;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -51,15 +53,56 @@ namespace ProMvc01
         // GET: /<controller>/
         public IActionResult Index()
         {
-            var xx = _Setting.Value.Bin;
-            _logger.LogError("我是错误显示"+ _dateTimeData);
-            _logger.LogDebug("我是调试信息"+ _WelcomeServices);
-            _logger.LogInformation("我是提示信息____"+ GetV());
+            //var xx = _Setting.Value.Bin;
+            //_logger.LogError("我是错误显示"+ _dateTimeData);
+            //_logger.LogDebug("我是调试信息"+ _WelcomeServices);
+            //_logger.LogInformation("我是提示信息____"+ GetV());
 
-            ViewBag.TransientItem = _guidTransientService.id();
-            ViewBag.ScopedItem = _guidScopedService.id();
-            
-            ViewBag.SingletonItem = _guidSingletonService.id();
+            //ViewBag.TransientItem = _guidTransientService.id();
+            //ViewBag.ScopedItem = _guidScopedService.id();
+
+            //ViewBag.SingletonItem = _guidSingletonService.id();
+
+
+
+            ConnectionFactory factory = new ConnectionFactory
+            {
+                UserName = "guest",//用户名
+                Password = "guest",//密码
+                HostName = "127.0.0.1"//rabbitmq ip
+            };
+
+            //创建连接
+            var connection = factory.CreateConnection();
+            //创建通道
+            var channel = connection.CreateModel();
+            //声明一个队列
+            channel.QueueDeclare("queuename_zkb", false, false, false, null);
+
+            Console.WriteLine("\nRabbitMQ连接成功，请输入消息，输入exit退出！");
+
+            string input;
+            do
+            {
+                input = "我是生产者输入的消息";
+
+                var sendBytes = Encoding.UTF8.GetBytes(input);
+                //发布消息
+                channel.BasicPublish("", "zkb", null, sendBytes);
+
+            } while (input.Trim().ToLower() != "exit");
+            channel.Close();
+            connection.Close();
+
+
+
+
+
+
+
+
+
+
 
 
 

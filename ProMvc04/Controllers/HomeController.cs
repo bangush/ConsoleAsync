@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProMvc04.Models;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
+using System.Text;
 
 namespace ProMvc04.Controllers
 {
@@ -20,9 +23,57 @@ namespace ProMvc04.Controllers
 
         public IActionResult Index()
         {
-            _logger.LogError("我是错误显示");
-            _logger.LogDebug("我是调试信息");
-            _logger.LogInformation("我是提示信息");
+            //_logger.LogError("我是错误显示");
+            //_logger.LogDebug("我是调试信息");
+            //_logger.LogInformation("我是提示信息");
+
+
+            //创建连接工厂
+            ConnectionFactory factory = new ConnectionFactory
+            {
+                UserName = "guest",//用户名
+                Password = "guest",//密码
+                HostName = "127.0.0.1"//rabbitmq ip
+            };
+
+            //创建连接
+            var connection = factory.CreateConnection();
+            //创建通道
+            var channel = connection.CreateModel();
+
+            //事件基本消费者
+            EventingBasicConsumer consumer = new EventingBasicConsumer(channel);
+            string aaa = "";
+            //接收到消息事件
+            consumer.Received += (ch, ea) =>
+            {
+                var message = Encoding.UTF8.GetString(ea.Body);
+                aaa = message;
+                Console.WriteLine($"收到消息： {message}");
+                //确认该消息已被消费
+                channel.BasicAck(ea.DeliveryTag, false);
+            };
+
+            //启动消费者 设置为手动应答消息
+            channel.BasicConsume("queuename_zkb", false, consumer);
+            Console.WriteLine("消费者已启动");
+            //Console.ReadKey();
+            channel.Dispose();
+            connection.Close();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             return View();
 
         }
