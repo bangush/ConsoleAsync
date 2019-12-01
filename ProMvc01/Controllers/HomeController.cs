@@ -27,14 +27,14 @@ namespace ProMvc01
         private readonly IScopedService _guidScopedService;
         private readonly ISingletonService _guidSingletonService;
 
-        public HomeController( ILogger<HomeController> logger, 
-                               IDateTimeData dateTimeData, 
-                               IWelcomeServices welcomeServices, 
-                               IHttpClientFactory myhttpclientfactory, 
+        public HomeController(ILogger<HomeController> logger,
+                               IDateTimeData dateTimeData,
+                               IWelcomeServices welcomeServices,
+                               IHttpClientFactory myhttpclientfactory,
                                IOptions<AppSetting> Setting,
 
                                ITransientService guidTransientService,
-                               IScopedService guidScopedService, 
+                               IScopedService guidScopedService,
                                ISingletonService guidSingletonService
 
             )
@@ -63,57 +63,34 @@ namespace ProMvc01
 
             //ViewBag.SingletonItem = _guidSingletonService.id();
 
-
-
             ConnectionFactory factory = new ConnectionFactory
             {
                 UserName = "guest",//用户名
                 Password = "guest",//密码
-                HostName = "127.0.0.1"//rabbitmq ip
+                HostName = "127.0.0.1",//rabbitmq ip
+                //VirtualHost = "/"
             };
 
             //创建连接
             var connection = factory.CreateConnection();
             //创建通道
             var channel = connection.CreateModel();
-            //声明一个队列
-            channel.QueueDeclare("queuename_zkb", false, false, false, null);
-
-            Console.WriteLine("\nRabbitMQ连接成功，请输入消息，输入exit退出！");
-
-            string input;
-            do
-            {
-                input = "我是生产者输入的消息";
-
-                var sendBytes = Encoding.UTF8.GetBytes(input);
-                //发布消息
-                channel.BasicPublish("", "zkb", null, sendBytes);
-
-            } while (input.Trim().ToLower() != "exit");
+            //声明一个队列    （队列名字，是否持久化，是否自动删除队列，是否排外的，是否等待服务器返回）
+            channel.QueueDeclare("queuename_zkb", false, false, false, null);           
+            Guid guid = new Guid();           
+            var sendBytes = Encoding.UTF8.GetBytes(guid.ToString());
+            //发布消息         （交换器名称，路由键，是否为强制性，
+            channel.BasicPublish("", "queuename_zkb", null, sendBytes);
             channel.Close();
             connection.Close();
-
-
-
-
-
-
-
-
-
-
-
-
-
             return View();
         }
 
         public async Task<string> GetV()
         {
-           
+
             var http = _myhttpclientfactory.CreateClient();
-            var x =await http.GetStringAsync("https://www.baidu.com/");
+            var x = await http.GetStringAsync("https://www.baidu.com/");
             return x;
         }
 

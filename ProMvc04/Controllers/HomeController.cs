@@ -27,53 +27,43 @@ namespace ProMvc04.Controllers
             //_logger.LogDebug("我是调试信息");
             //_logger.LogInformation("我是提示信息");
 
-
-            //创建连接工厂
-            ConnectionFactory factory = new ConnectionFactory
+            IConnectionFactory connFactory = new ConnectionFactory//创建连接工厂对象
             {
-                UserName = "guest",//用户名
-                Password = "guest",//密码
-                HostName = "127.0.0.1"//rabbitmq ip
+                HostName = "127.0.0.1",//IP地址
+                //Port = 5672,//端口号
+                UserName = "guest",//用户账号
+                Password = "guest"//用户密码
             };
-
-            //创建连接
-            var connection = factory.CreateConnection();
-            //创建通道
-            var channel = connection.CreateModel();
-
-            //事件基本消费者
-            EventingBasicConsumer consumer = new EventingBasicConsumer(channel);
-            string aaa = "";
-            //接收到消息事件
-            consumer.Received += (ch, ea) =>
+            using (IConnection conn = connFactory.CreateConnection())
             {
-                var message = Encoding.UTF8.GetString(ea.Body);
-                aaa = message;
-                Console.WriteLine($"收到消息： {message}");
-                //确认该消息已被消费
-                channel.BasicAck(ea.DeliveryTag, false);
-            };
+                using (IModel channel = conn.CreateModel())
+                {
+                    String queueName = String.Empty;
+                    queueName = "queuename_zkb";
+                    //声明一个队列
+                    channel.QueueDeclare(
+                      queue: queueName,//消息队列名称
+                      durable: false,//是否缓存
+                      exclusive: false,
+                      autoDelete: false,
+                      arguments: null
+                       );
+                    //创建消费者对象
+                    var consumer = new EventingBasicConsumer(channel);
+                    consumer.Received += (model, ea) =>
+                    {
+                        byte[] message = ea.Body;//接收到的消息
+                        Console.WriteLine("接收到信息为:" + Encoding.UTF8.GetString(message));
 
-            //启动消费者 设置为手动应答消息
-            channel.BasicConsume("queuename_zkb", false, consumer);
-            Console.WriteLine("消费者已启动");
-            //Console.ReadKey();
-            channel.Dispose();
-            connection.Close();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                        ViewData["1212"] = Encoding.UTF8.GetString(message);
+                        //_logger.LogError("我是错误显示")
+                    };
+                    //消费者开启监听
+                    channel.BasicConsume(queue: queueName, autoAck: true, consumer: consumer);
+                   
+                }
+            }
+            ViewData["1213"] = "123456";
             return View();
 
         }
