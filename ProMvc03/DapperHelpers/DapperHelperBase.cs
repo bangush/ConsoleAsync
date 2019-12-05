@@ -5,10 +5,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProMvc03
+namespace ProMvc03.DapperHelpers
 {
-    public class DapperHelper1
+    public class DapperHelperBase
     {
+
         //字段和属性的区别：https://www.cnblogs.com/green-jcx/p/9023141.html
         //字段
         private static string _connection = string.Empty;
@@ -20,13 +21,13 @@ namespace ProMvc03
 
         private static IDbConnection dbConnection = null;
 
-        public static DapperHelper1 uniqueInstance;
+        public static DapperHelperBase uniqueInstance;
 
         private static readonly object locker = new object();
 
-        private DapperHelper1()
+        public DapperHelperBase()
         {
-             _connection= @"server=.;uid=sa;pwd=sasasa;database=Dapper";
+            _connection = @"server=.;uid=sa;pwd=sasasa;database=Dapper";
         }
 
         //创建数据库连接对象并打开链接
@@ -44,9 +45,8 @@ namespace ProMvc03
             return dbConnection;
         }
 
-
         //获取实例，保证只存在一个实例
-        public static DapperHelper1 GetInstance()
+        public static DapperHelperBase GetInstance()
         {
             //双重锁定实现单利模式，在外层加个判空条件主要是为了减少枷锁，释放锁的不必要的损耗
             if (uniqueInstance == null)
@@ -55,11 +55,12 @@ namespace ProMvc03
                 {
                     if (uniqueInstance == null)
                     {
-                        uniqueInstance = new DapperHelper1();
+                        uniqueInstance = new DapperHelperBase();
                     }
                 }
             }
             return uniqueInstance;
         }
+
     }
 }
