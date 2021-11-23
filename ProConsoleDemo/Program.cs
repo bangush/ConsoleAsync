@@ -13,6 +13,9 @@ namespace ProConsoleDemo
 
         static async Task Main(string[] args)
         {
+
+            string bob = "";
+
             var client = new HttpClient();
             var result = await client.GetStringAsync("https://www.baidu.com/");
 

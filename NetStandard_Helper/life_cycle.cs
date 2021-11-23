@@ -28,7 +28,7 @@ namespace NetStandard_Helper
 
   public  class life_cycle : IGuidService
     {
-
+        string a = "";
         private readonly string   _item;
         Random rnd = new Random();
         public life_cycle()
